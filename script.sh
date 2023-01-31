@@ -2,4 +2,4 @@
 
 echo "Today is $(date)"
 
-echo $(ls -lah)
+ls -lah
