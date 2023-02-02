@@ -10,7 +10,7 @@ pipeline {
     stage ('Build') {
       steps {
         sh 'printenv'
-        sh 'docker build --no-cache -t barek/demo:latest .'
+        sh 'docker build -t barek/demo:latest .'
       }
     }
     stage ('Tag image') {
@@ -21,7 +21,8 @@ pipeline {
     stage ('Push image') {
       steps {
         script {
-          docker.withRegistry('https://943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp', 'ecr:eu-central-1:makolab_aws') {
+          app = docker.build("bsbootcamp")
+          docker.withRegistry('https://943696080604.dkr.ecr.eu-central-1.amazonaws.com', 'ecr:eu-central-1:makolab_aws') {
                               app.push("latest")
                               }
         }
