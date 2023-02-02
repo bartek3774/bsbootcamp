@@ -4,7 +4,7 @@ pipeline {
     stage('Remove previous images') {
       steps {
           sh 'echo hello'
-          sh 'docker rmi $(docker images -q barek/demo)'
+          sh 'docker rmi -f $(docker images -q barek/demo)'
       }
     }
     stage ('Build') {
