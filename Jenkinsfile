@@ -10,7 +10,8 @@ pipeline {
     stage ('Build') {
       steps {
         sh 'printenv'
-        sh 'docker build --no-cache -t barek/demo:""$GIT_COMMIT"" .'
+        sh 'docker build --no-cache -t barek/demo:latest .'
+        sh 'docker tag barek/demo:latest barek/demo:""$GIT_COMMIT"" '
       }
     }
   }
