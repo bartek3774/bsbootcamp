@@ -21,7 +21,7 @@ pipeline {
     stage ('Push image') {
       steps {
         script {
-          docker.withRegistry('943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp', 'ecr:eu-central-1:makolab_aws') {
+          docker.withRegistry('https://943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp', 'ecr:eu-central-1:makolab_aws') {
                               app.push("latest")
                               }
         }
