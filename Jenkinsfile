@@ -10,7 +10,9 @@ pipeline {
     stage ('Build') {
       steps {
         sh 'printenv'
-        app = docker.build("bsbootcamp")
+        script {
+          app = docker.build("bsbootcamp")
+        }
        //sh 'docker build -t barek/demo:latest .'
       }
     }
