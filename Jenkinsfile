@@ -5,7 +5,7 @@ pipeline {
       steps {
                         script {
                     env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
-                            parameters: [choice(name: 'RELEASE_SCOPE', choices: 'patch\nminor\nmajor', description: 'What is the release scope?')]
+                            parameters: [string(name: 'IMAGE_TAG', description: 'Please provide docker image tag')]
                 }
           sh 'echo hello'
           //sh 'docker rmi -f $(docker images -q barek/demo)'
@@ -31,7 +31,7 @@ pipeline {
         script {
             docker.withRegistry('https://943696080604.dkr.ecr.eu-central-1.amazonaws.com', 'ecr:eu-central-1:makolab_aws') {
             app.push("latest")
-            app.push("22")
+            app.push(${env.IMAGE_TAG})
                               }
         }
       }
