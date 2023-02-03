@@ -31,7 +31,7 @@ pipeline {
         script {
             docker.withRegistry('https://943696080604.dkr.ecr.eu-central-1.amazonaws.com', 'ecr:eu-central-1:makolab_aws') {
             app.push("latest")
-            app.push(${env.IMAGE_TAG})
+            app.push(env.IMAGE_TAG)
                               }
         }
       }
