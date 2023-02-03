@@ -4,7 +4,7 @@ pipeline {
     stage('Remove previous images') {
       steps {
                         script {
-                    env.RELEASE_SCOPE = input message: 'User input required', ok: 'Release!',
+                    env.IMAGE_TAG = input message: 'User input required', ok: 'Release!',
                             parameters: [string(name: 'IMAGE_TAG', description: 'Please provide docker image tag')]
                 }
           sh 'echo hello'
