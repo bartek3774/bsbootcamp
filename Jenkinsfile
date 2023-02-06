@@ -4,14 +4,14 @@ pipeline {
     stage('Remove previous images') {
       steps {
           sh 'echo hello'
-          sh 'docker rmi -f $(docker images -q 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp)'
+          //sh 'docker rmi -f $(docker images -q 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp)'
       }
     }
     stage ('Build') {
       steps {
         sh 'printenv'
         script {
-          app = docker.build("bsbootcamp", '--no-cache')
+          app = docker.build("--no-cache bsbootcamp")
         }
        //sh 'docker build -t barek/demo:latest .'
       }
