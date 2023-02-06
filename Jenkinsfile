@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh 'printenv'
         script {
-          app = docker.build("-f Dockerfile", "--no-cache")
+          app = docker.build("bsb", "-f Dockerfile", "--no-cache")
         }
        //sh 'docker build -t barek/demo:latest .'
       }
