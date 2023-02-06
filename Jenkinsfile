@@ -3,14 +3,8 @@ pipeline {
   stages {
     stage('Remove previous images') {
       steps {
-        script {
-          def check_img = sh 'docker images -q 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp |wc -l'
-          if ( check_img.toInteger() > 0) {
-            sh 'docker rmi -f $(docker images -q 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp)'
-          }
-        }
           sh 'echo hello'
-          //sh 'docker rmi -f $(docker images -q 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp)'
+          sh 'docker rmi -f $(docker images -q 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp)'
       }
     }
     stage ('Build') {
