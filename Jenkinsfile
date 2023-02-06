@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh 'printenv'
         script {
-          app = docker.build("bsbootcamp")
+          app = docker.build("bsbootcamp", '--no-cache')
         }
        //sh 'docker build -t barek/demo:latest .'
       }
@@ -21,6 +21,7 @@ pipeline {
         script {
           env.IMAGE_TAG = input message: 'User input required', ok: 'Save tag!',
           parameters: [string(name: 'IMAGE_TAG', description: 'Please provide docker image tag')]
+          app.tag(env.IMAGE_TAG)
         }
         //sh 'docker tag barek/demo:latest barek/demo:""$GIT_COMMIT"" '
       }
