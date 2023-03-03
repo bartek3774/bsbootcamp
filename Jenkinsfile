@@ -34,6 +34,9 @@ pipeline {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {         
           sh "sed -i 's@devops_image@${DOCKER_IMAGE}@g' nginx_deployment.yaml"
           sh 'cat nginx_deployment.yaml'
+          sh 'aws eks update-kubeconfig --name bsbootcamp --region us-east-1'
+          sh 'kubectl config get-contexts'
+          sh 'kubectl get nodes'
         }
       }
     }    
