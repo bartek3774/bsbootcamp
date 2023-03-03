@@ -8,12 +8,12 @@ pipeline {
       }
     }
     stage ('Tag image') {
-      steps {
+      
         def userInput = input(id: 'userInput', message: 'User input required', parameters: [
             [$class: 'ChoiceParameterDefinition', choices: string, description: 'Please provide docker image tag', name:'input'],
             ])
             IMAGE_TAG = userInput
-      }
+      
     }    
     stage('Push image to ECR') {
       steps {
