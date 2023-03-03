@@ -21,9 +21,9 @@ pipeline {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {
           sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin "943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp"'
           sh 'docker tag bsbootcamp:latest 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:latest'
-          sh 'docker tag bsbootcamp:latest 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:'env.IMAGE_TAG
+          sh 'docker tag bsbootcamp:latest 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:'$env.IMAGE_TAG
           sh 'docker push 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:latest'
-          sh 'docker push 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:'env.IMAGE_TAG          
+          sh 'docker push 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:'$env.IMAGE_TAG          
         }
         }
       }
