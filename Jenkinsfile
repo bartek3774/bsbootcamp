@@ -3,8 +3,17 @@ pipeline {
   stages {
     stage('Docker build image') {
       steps {
-          sh 'docker build -t bsbootcamp .'
+        sh 'docker build -t bsbootcamp .'
 
+      }
+    }
+    stage('Push image to ECR') {
+      steps {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {
+          sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin "943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp"'
+          sh 'docker tag bsbootcamp:latest 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:latest'
+          sh 'docker push 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:latest'
+        }
       }
     }
   }
