@@ -9,10 +9,10 @@ pipeline {
     }
     stage ('Tag image') {
       steps {
+        script{
           IMAGE_TAG = input message: 'User input required', ok: 'Save tag!',
           parameters: [string(name: 'IMAGE_TAG', description: 'Please provide docker image tag')]
-        
-        //sh 'docker tag barek/demo:latest barek/demo:""$GIT_COMMIT"" '
+        }
       }
     }    
     stage('Push image to ECR') {
