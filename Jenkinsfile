@@ -9,23 +9,20 @@ pipeline {
     }
     stage ('Tag image') {
       steps {
-        script {
-          env.IMAGE_TAG = input message: 'User input required', ok: 'Save tag!',
+          IMAGE_TAG = input message: 'User input required', ok: 'Save tag!',
           parameters: [string(name: 'IMAGE_TAG', description: 'Please provide docker image tag')]
-        }
+        
         //sh 'docker tag barek/demo:latest barek/demo:""$GIT_COMMIT"" '
       }
     }    
     stage('Push image to ECR') {
       steps {
-        script {
-          withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {
-            sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin "943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp"'
-            sh 'docker tag bsbootcamp:latest 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:latest'
-            sh 'docker tag bsbootcamp:latest 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:env.IMAGE_TAG'
-            sh 'docker push 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:latest'
-            sh 'docker push 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:env.IMAGE_TAG'
-          }
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {
+          sh 'aws ecr get-login-password --region eu-central-1 | docker login --username AWS --password-stdin "943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp"'
+          sh 'docker tag bsbootcamp:latest 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:latest'
+          sh 'docker tag bsbootcamp:latest 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:$IMAGE_TAG'
+          sh 'docker push 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:latest'
+          sh 'docker push 943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:$IMAGE_TAG'          
         }
       }
     }
