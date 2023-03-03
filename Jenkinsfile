@@ -27,10 +27,11 @@ pipeline {
       }
     }
     stage('Deploy app to EKS') {
-      DOCKER_IMAGE="943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:${env.IMAGE_TAG}"
       steps {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {
-          
+        script{
+          DOCKER_IMAGE="943696080604.dkr.ecr.eu-central-1.amazonaws.com/bsbootcamp:${env.IMAGE_TAG}"
+        }
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {         
           sh 'sed -i "s@devops_image@$DOCKER_IMAGE@g" nginx_deployment.yaml'
           sh 'cat nginx_deployment.yaml'
         }
