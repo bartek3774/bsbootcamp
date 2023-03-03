@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx-bs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-bs
+  template:
+    metadata:
+      labels:
+        app: nginx-bs
+    spec:
+      containers:
+      - name: nginx-bs
+        image: devops_image
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "200m"
+          limits:
+            memory: "200Mi"
+            cpu: "200m"        
+        ports:
+        - containerPort: 80
