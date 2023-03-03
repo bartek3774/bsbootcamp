@@ -7,7 +7,7 @@ pipeline {
           withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {
             sh 'aws eks list-clusters --region us-east-1'
           }
-          sh 'kubectl version'
+          sh 'kubectl config get-contexts'
       }
     }
   }
