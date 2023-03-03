@@ -37,6 +37,8 @@ pipeline {
           sh 'aws eks update-kubeconfig --name bsbootcamp --region us-east-1'
           sh 'kubectl config get-contexts'
           sh 'kubectl get nodes'
+          sh 'kubectl apply -f nginx_deployment.yaml'
+          sh 'kubectl expose deployment nginx-bs --type=LoadBalancer --name=nginx-bs-service'
         }
       }
     }    
