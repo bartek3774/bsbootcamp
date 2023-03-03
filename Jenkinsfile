@@ -4,7 +4,10 @@ pipeline {
     stage('Remove previous images') {
       steps {
           sh 'echo hello'
-          sh 'aws eks list-clusters  --profile makolab_aws --region us-east-1'
+          
+            withCredentials([string(credentialsId: 'makolab_aws', variable: 'klucz')]) {
+        sh 'aws eks list-clusters  --profile klucz --region us-east-1'
+    }
       }
     }
   }
