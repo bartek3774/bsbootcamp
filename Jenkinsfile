@@ -8,6 +8,7 @@ pipeline {
 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {
                sh "echo this is ${env.AWS_ACCESS_KEY_ID}"
                sh "echo this is ${env.AWS_SECRET_ACCESS_KEY}"
+              sh 'aws eks list-clusters  --region us-east-1'
        }
       }
     }
