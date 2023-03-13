@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress  
+  template:
+    metadata:
+      labels:
+        app: wordpress
+    spec:
+      containers:
+        - name: wordpress
+          image: wordpress
+          ports:
+            -  containerPort: 80
+          env:
+            - name: WORDPRESS_DB_PASSWORD
+              value: 2Ugx6pTTriN6Eq7
+            - name: WORDPRESS_DB_NAME
+              value: wordpress
+            - name: WORDPRESS_DB_USER
+              value: wordpress
+            - name: WORDPRESS_DB_HOST
+              value: bs-bc3-db.cw08sm1zgalz.us-east-1.rds.amazonaws.com
+

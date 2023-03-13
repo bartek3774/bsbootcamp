@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prestashop
+  labels:
+    app: prestashop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prestashop  
+  template:
+    metadata:
+      labels:
+        app: prestashop
+    spec:
+      containers:
+        - name: prestashop
+          image: prestashop/prestashop
+          ports:
+            -  containerPort: 80
+          env:
+            - name: DB_PASSWD
+              value: 2Ugx6pTTriN6Eq7
+            - name: DB_NAME
+              value: bitnami_prestashop
+            - name: DB_USER
+              value: bn_prestashop
+            - name: DB_SERVER
+              value: bs-bc3-db.cw08sm1zgalz.us-east-1.rds.amazonaws.com
+
