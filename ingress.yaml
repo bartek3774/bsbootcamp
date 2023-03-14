@@ -1,4 +1,3 @@
-# Annotations Reference: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations/
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -6,18 +5,14 @@ metadata:
   labels:
     app: ingress-app
   annotations:
-    # Load Balancer Name
     alb.ingress.kubernetes.io/load-balancer-name: bs-bc3-ingress
-    #kubernetes.io/ingress.class: "alb" (OLD INGRESS CLASS NOTATION - STILL WORKS BUT RECOMMENDED TO USE IngressClass Resource)
-    # Ingress Core Settings
     alb.ingress.kubernetes.io/scheme: internet-facing
-    # Health Check Settings
     alb.ingress.kubernetes.io/healthcheck-protocol: HTTP 
     alb.ingress.kubernetes.io/healthcheck-port: traffic-port
     alb.ingress.kubernetes.io/healthcheck-path: /
     alb.ingress.kubernetes.io/healthcheck-interval-seconds: '15'
     alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '5'
-    alb.ingress.kubernetes.io/success-codes: '200'
+    alb.ingress.kubernetes.io/success-codes: 301, 302
     alb.ingress.kubernetes.io/healthy-threshold-count: '2'
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
     alb.ingress.kubernetes.io/actions.rule-internal1: >
@@ -25,7 +20,7 @@ metadata:
     alb.ingress.kubernetes.io/conditions.rule-internal1: >
       [{"field":"source-ip","sourceIpConfig":{"values":["195.117.107.110/32"]}}]
 spec:
-  ingressClassName: alb # Ingress Class
+  ingressClassName: alb
   rules:
     - http:
         paths:
