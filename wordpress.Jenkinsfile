@@ -23,7 +23,7 @@ pipeline {
     stage('Deploy app to EKS') {
       steps {
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {         
-          sh 'aws eks update-kubeconfig --name bsbootcamp --region us-east-1'
+          sh 'aws eks update-kubeconfig --name bs-bc3-eks --region us-east-1'
           sh 'kubectl config get-contexts'
           sh 'kubectl get nodes'
           sh 'kubectl apply -f wordpress.yaml'
