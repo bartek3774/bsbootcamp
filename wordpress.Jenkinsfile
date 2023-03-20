@@ -20,6 +20,16 @@ pipeline {
         }
       }
     }   
-   
+    stage('Deploy app to EKS') {
+      steps {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'makolab_aws', variable: 'AWS_ACCESS_KEY_ID']]) {         
+          sh 'aws eks update-kubeconfig --name bsbootcamp --region us-east-1'
+          sh 'kubectl config get-contexts'
+          sh 'kubectl get nodes'
+          sh 'kubectl apply -f wordpress.yaml'
+         // sh 'kubectl expose deployment nginx-bs --type=LoadBalancer --name=nginx-bs-service'
+        }
+      }
+    }    
   }
 }
