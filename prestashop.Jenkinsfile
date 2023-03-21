@@ -3,13 +3,13 @@ pipeline {
   stages {
     stage('Docker build image') {
       steps {
-        sh 'docker build -t wp1 -f prestashop.Dockerfile .'
+        sh 'docker build -t ps1 -f prestashop.Dockerfile .'
 
       }
     }
     stage ('Tag image') {
       steps {
-        sh 'docker tag wp1:latest 943696080604.dkr.ecr.us-east-1.amazonaws.com/bs-bc3:prestashop'
+        sh 'docker tag ps1:latest 943696080604.dkr.ecr.us-east-1.amazonaws.com/bs-bc3:prestashop'
       }
     }     
     stage('Push image to ECR') {
