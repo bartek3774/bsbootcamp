@@ -16,7 +16,7 @@ metadata:
     alb.ingress.kubernetes.io/healthy-threshold-count: '2'
     alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
     alb.ingress.kubernetes.io/actions.rule-internal1: >
-      {"type":"forward","forwardConfig":{"targetGroups":[{"serviceName":"wordpress-service-nodeport","servicePort":"80"}]}}
+      {"type":"forward","forwardConfig":{"targetGroups":[{"serviceName":"prestashop-service-nodeport","servicePort":"80"}]}}
     alb.ingress.kubernetes.io/conditions.rule-internal1: >
       [{"field":"source-ip","sourceIpConfig":{"values":["195.117.107.110/32"]}}]
 spec:
