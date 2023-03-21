@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: prestashop
-          image: prestashop/prestashop
+          image: 943696080604.dkr.ecr.us-east-1.amazonaws.com/bs-bc3:prestashop
           ports:
             -  containerPort: 80
           env:
